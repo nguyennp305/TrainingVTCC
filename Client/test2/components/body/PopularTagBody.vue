@@ -28,19 +28,36 @@
 </template>
 
 <script>
-import data from '../../dataFake/data.json'
+// import data from '../../dataFake/data.json'
 export default {
   data() {
     return {
-      popularTags: data.popularTags,
+      // popularTags: data.popularTags,
+      popularTags: [],
       openPopular: true,
     }
   },
+
   computed: {
     checkIsDark: {
       get() {
         return this.$store.state.isDark
       },
+    },
+  },
+
+  // gọi getPopularTags khi component đc tạo
+  async created() {
+    await this.getPopularTags()
+  },
+  methods: {
+    async getPopularTags() {
+      try {
+        const response = await this.$axios.get('http://localhost:4000/tags')
+        this.popularTags = response.data
+      } catch (error) {
+        console.log(error);
+      }
     },
   },
 }

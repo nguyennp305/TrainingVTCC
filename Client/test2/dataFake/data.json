@@ -67,28 +67,6 @@
         "numberComment": 0
       }
     ],
-    "popularTags": [
-      { "id": 1, "name": "#javascript" },
-      { "id": 2, "name": "#angular" },
-      { "id": 4, "name": "#vue" },
-      { "id": 5, "name": "#react" },
-      { "id": 6, "name": "#android" },
-      { "id": 7, "name": "#next" },
-      { "id": 8, "name": "#webdev" },
-      { "id": 9, "name": "#beginners" },
-      { "id": 10, "name": "#programming" },
-      { "id": 11, "name": "#tutorial" },
-      { "id": 12, "name": "#python" },
-      { "id": 13, "name": "#css" },
-      { "id": 14, "name": "#devops" },
-      { "id": 15, "name": "#node" },
-      { "id": 16, "name": "#html" },
-      { "id": 17, "name": "#github" },
-      { "id": 18, "name": "#php" },
-      { "id": 19, "name": "#vscode" },
-      { "id": 20, "name": "#database" },
-      { "id": 21, "name": "#typescript" }
-    ],
     "categories": [
       { "id": 1, "name": "Developer", "number": 20 },
       { "id": 2, "name": "Software", "number": 20 },

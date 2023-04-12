@@ -31,6 +31,7 @@ export default Vue.extend({
   components: {
     PageWebTest,
   },
+  layout: 'testWeb',
   data() {
     return {
       // isDark: false,
