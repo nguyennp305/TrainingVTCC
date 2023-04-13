@@ -7,11 +7,32 @@ import { Tag } from './tag.interface';
 export class TagsService {
   constructor(@InjectModel('Tag') private readonly tagModel: Model<Tag>) {}
 
+  // tìm tất cả tags
   async findAll(): Promise<Tag[]> {
     return await this.tagModel.find().exec();
   }
 
-  async findById(id: string): Promise<Tag> {
-    return await this.tagModel.findById(id).exec();
+  // tìm theo id của tags
+  async findOneById(id: number): Promise<Tag> {
+    return this.tagModel.findOne({ id }).exec();
+  }
+
+  // create tag
+  async createTag(tag: Tag): Promise<Tag> {
+    const newTag = new this.tagModel(tag);
+    return newTag.save();
+  }
+
+  // update tag
+  async updateTagById(id: number, tag: Tag): Promise<Tag> {
+    const updatedTag = await this.tagModel.findOneAndUpdate({ id }, tag, {
+      new: true,
+    });
+    return updatedTag;
+  }
+
+  // delete tag
+  async deleteTag(id: number): Promise<Tag> {
+    return this.tagModel.findOneAndDelete({ id }).exec();
   }
 }

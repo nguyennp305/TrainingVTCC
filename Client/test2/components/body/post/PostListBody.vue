@@ -19,7 +19,7 @@
               <b>{{ onePosts.title }}</b>
             </div>
             <div style="color: #a9a9a9">{{ onePosts.content }}</div>
-            <div style="color: #a9a9a9">{{ onePosts.tags }}</div>
+            <div style="color: #a9a9a9">#{{ onePosts.tags }}</div>
           </div>
           <div class="comment-and-likes" style="color: #a9a9a9">
             <div>

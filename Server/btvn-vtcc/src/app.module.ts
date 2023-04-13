@@ -7,6 +7,7 @@ import { MongooseModule } from '@nestjs/mongoose';
 import { UsersModule } from './users/users.module';
 import { AuthModule } from './auth/auth.module';
 import { TagsModule } from './popular-tags/popular-tags.module';
+import { ListPostModule } from './list-post/list-post.module';
 @Module({
   imports: [
     // ConfigModule.forRoot(): Đây là một module NestJS để đọc các biến môi trường được định nghĩa trong tệp .env và tạo ra một đối tượng cấu hình, cho phép ứng dụng đọc các giá trị cấu hình mà không cần phải trực tiếp đặt giá trị trong mã nguồn.
@@ -22,6 +23,7 @@ import { TagsModule } from './popular-tags/popular-tags.module';
     UsersModule,
     AuthModule,
     TagsModule,
+    ListPostModule,
   ],
   controllers: [AppController],
   providers: [AppService],
