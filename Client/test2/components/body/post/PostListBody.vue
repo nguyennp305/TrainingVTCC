@@ -49,7 +49,7 @@
   
   <script>
   import Vue from 'vue'
-  import data from '../../.././dataFake/data.json'
+  // import data from '../../.././dataFake/data.json'
   import CommentBody from '../commentBody/CommentBody.vue'
   export default Vue.extend({
     components: {
@@ -63,7 +63,8 @@
     },
     data() {
       return {
-        listPosts: data.listPosts,
+        // listPosts: data.listPosts,
+        listPosts: [],
         testSearch: '',
       }
     },
@@ -79,7 +80,21 @@
         }
       },
     },
+    async created() {
+      await this.getListPosts()
+    },
+
     methods: {
+
+      async getListPosts() {
+        try {
+          const response = await this.$axios.get('http://localhost:4000/list-post')
+          this.listPosts = response.data
+        } catch (error) {
+          console.log(error);
+        }
+      },
+
       updateNumberComment(index, value) {
         this.filteredListPosts[index].numberComment = value
       },

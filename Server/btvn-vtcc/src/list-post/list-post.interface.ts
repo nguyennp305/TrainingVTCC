@@ -5,7 +5,7 @@ export interface ListPost {
   readonly tags: string;
   readonly numberHeart: number;
   readonly heartColor: string;
-  readonly avatar: number;
+  readonly avatar: string;
   readonly checkComment: boolean;
   readonly numberComment: number;
 }

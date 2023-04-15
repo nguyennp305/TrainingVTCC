@@ -16,7 +16,7 @@
           <div class="header-right-all">
             <div class="header-right-start">
               <span style="margin-right: 10px; cursor: pointer"
-                ><nuxt-link to="/">Home</nuxt-link></span
+                ><nuxt-link to="/" @click.native="reloadPageWithNewURL">Home</nuxt-link></span
               >
               <span style="margin-right: 10px; cursor: pointer"
                 ><nuxt-link to="/newPost/NewPost">New Post</nuxt-link></span
@@ -79,6 +79,12 @@ export default Vue.extend({
       },
     },
   },
+  methods: {
+    reloadPageWithNewURL() {
+      this.$router.push('/PageWebTest');
+      location.reload();
+    }
+  }
 })
 </script>
 

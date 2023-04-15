@@ -7,7 +7,7 @@ export const ListPostSchema = new mongoose.Schema({
   tags: String,
   numberHeart: Number,
   heartColor: String,
-  avatar: Number,
+  avatar: String,
   checkComment: Boolean,
   numberComment: Number,
 });

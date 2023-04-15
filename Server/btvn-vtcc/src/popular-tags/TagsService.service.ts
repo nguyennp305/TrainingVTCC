@@ -12,9 +12,9 @@ export class TagsService {
     return await this.tagModel.find().exec();
   }
 
-  // tìm theo id của tags
-  async findOneById(id: number): Promise<Tag> {
-    return this.tagModel.findOne({ id }).exec();
+  // tìm theo name của tags
+  async findOneByName(name: string): Promise<Tag> {
+    return this.tagModel.findOne({ name }).exec();
   }
 
   // create tag
@@ -24,15 +24,15 @@ export class TagsService {
   }
 
   // update tag
-  async updateTagById(id: number, tag: Tag): Promise<Tag> {
-    const updatedTag = await this.tagModel.findOneAndUpdate({ id }, tag, {
-      new: true,
-    });
-    return updatedTag;
-  }
+  // async updateTagById(name: string, tag: Tag): Promise<Tag> {
+  //   const updatedTag = await this.tagModel.findOneAndUpdate({ name }, tag, {
+  //     new: true,
+  //   });
+  //   return updatedTag;
+  // }
 
   // delete tag
-  async deleteTag(id: number): Promise<Tag> {
-    return this.tagModel.findOneAndDelete({ id }).exec();
+  async deleteTag(name: string): Promise<Tag> {
+    return this.tagModel.findOneAndDelete({ name }).exec();
   }
 }

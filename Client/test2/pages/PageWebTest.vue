@@ -18,6 +18,8 @@ export default {
     BodyWeb,
     // FooterWebVue,
   },
+  // layout: 'testWeb',
+
   data() {
     return {
       infomation: {

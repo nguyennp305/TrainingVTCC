@@ -10,16 +10,32 @@
             <h4>Popular tags</h4>
           </td>
         </tr>
+        <tr>
+          <td><button @click="addTagClick = true">Add tag</button></td>
+        </tr>
+        <tr v-show="addTagClick"><td>
+            <input
+              v-model="addTagName"
+              type="text"
+              placeholder="Add tag"
+              required
+            />
+            <br/>
+            <b v-show="checkExistOrEmpty" style="color: red">New tag is empty or not valid !!</b>
+            <br/>
+            <button @click="AddTag">Add</button>
+            </td></tr>
         <tr
-          v-for="category in popularTags"
+          v-for="(category, index) in popularTags"
           v-show="openPopular"
-          :key="category.id"
+          :key="index"
         >
           <td
             class="name-popular"
             :style="{ color: checkIsDark ? 'white' : 'black' }"
           >
-            {{ category.name }}
+            #{{ category.name }}
+            <button @click="deleteTag(category.name)">Delete</button>
           </td>
         </tr>
       </tbody>
@@ -35,6 +51,9 @@ export default {
       // popularTags: data.popularTags,
       popularTags: [],
       openPopular: true,
+      addTagClick: false,
+      addTagName: '',
+      checkExistOrEmpty: false,
     }
   },
 
@@ -56,7 +75,36 @@ export default {
         const response = await this.$axios.get('http://localhost:4000/tags')
         this.popularTags = response.data
       } catch (error) {
-        console.log(error);
+        console.log(error)
+      }
+    },
+    async deleteTag(name) {
+      try {
+        const response = await this.$axios.delete(
+          `http://localhost:4000/tags/${name}`
+        )
+        console.log(response.data)
+        this.getPopularTags()
+      } catch (error) {
+        console.log(error)
+      }
+    },
+    async AddTag() {
+      if (this.addTagName === '') {
+        this.checkExistOrEmpty = true;
+      } else {
+        try {
+        const response = await this.$axios.post(`http://localhost:4000/tags`, {
+          name: this.addTagName,
+        })
+        console.log(response.data)
+        this.addTagName = '';
+        this.checkExistOrEmpty = false;
+        this.getPopularTags()
+        this.addTagClick = false;
+      } catch (error) {
+        console.log(error)
+      }
       }
     },
   },

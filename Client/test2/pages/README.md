@@ -1,12 +1,12 @@
-### chuyển hết data từ json sang db.
+### chuyển hết data từ json sang db. -> done
 
 ### search tag bằng db
 
-### dùng phân chia layout
+### dùng phân chia layout -> done đc header, footer
 
 ### cố định nút theme light-dark
 
-### làm các page lân cận (tham khảo working on paradise)
+### làm các page lân cận (tham khảo working on paradise), đang làm newpost
 
 ### chỉnh lại giao diện comment
 
@@ -14,6 +14,8 @@
 
 ### cho database lên link nào mà lưu trữ đc khi thay máy
 
-### api mới có get all, get id của popularTags, put theo id, delete theo id, mai làm cái get theo name Tags
+### function popular tag -> done, nếu rảnh thì thêm cái click vào 1 tag nó ra gì, hiện có get all, get name, create, delete, not put
 
-### đã làm được get all, get tags của listPosts,
+### listPost, bên api done cái: api get all, get by tag, create, put by id, delete by id -> cần sửa bên client, cái avatar create thì alert link address.
+
+### cần làm comment trên db cho từng post

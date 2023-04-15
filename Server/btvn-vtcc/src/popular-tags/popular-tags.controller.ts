@@ -3,9 +3,9 @@ import {
   Controller,
   Delete,
   Get,
+  NotFoundException,
   Param,
   Post,
-  Put,
 } from '@nestjs/common';
 import { TagsService } from './TagsService.service';
 import { Tag } from './tag.interface';
@@ -20,10 +20,12 @@ export class PopularTagsController {
     return this.tagsService.findAll();
   }
 
-  //get tag by id
-  @Get(':id')
-  async findOne(@Param('id') id: number): Promise<Tag> {
-    return this.tagsService.findOneById(id);
+  //get tag by name
+  @Get(':name')
+  async findOne(@Param('name') name: string): Promise<Tag> {
+    const tag = await this.tagsService.findOneByName(name);
+    if (!tag) throw new NotFoundException(`Tag with name "${name}" not found`);
+    return tag;
   }
 
   // create tag
@@ -33,15 +35,15 @@ export class PopularTagsController {
   }
 
   // update tag
-  @Put(':id')
-  async updateTag(@Param('id') id: number, @Body() tag: Tag): Promise<Tag> {
-    const updatedTag = await this.tagsService.updateTagById(id, tag);
-    return updatedTag;
-  }
+  // @Put(':name')
+  // async updateTag(@Param('name') name: string, @Body() tag: Tag): Promise<Tag> {
+  //   const updatedTag = await this.tagsService.updateTagById(name, tag);
+  //   return updatedTag;
+  // }
 
   // delete tag
-  @Delete(':id')
-  async delete(@Param('id') id: number): Promise<Tag> {
-    return this.tagsService.deleteTag(id);
+  @Delete(':name')
+  async delete(@Param('name') name: string): Promise<Tag> {
+    return this.tagsService.deleteTag(name);
   }
 }
