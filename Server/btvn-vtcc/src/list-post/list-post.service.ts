@@ -14,9 +14,14 @@ export class ListPostService {
     return await this.listPostModel.find().exec();
   }
 
+  // tìm theo _id của post trong listPost
+  async findById(id: string): Promise<ListPost[]> {
+    return await this.listPostModel.find({ _id: id }).exec();
+  }
+
   // tìm theo tags của post trong listPost
   async findByTags(tags: string): Promise<ListPost[]> {
-    return await this.listPostModel.find({ tags }).exec();
+    return await this.listPostModel.find({ tags: tags }).exec();
   }
 
   // create a post in list post

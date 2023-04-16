@@ -21,8 +21,14 @@ export class ListPostController {
     return this.listPostService.findAll();
   }
 
+  // tìm post theo id.
+  @Get(':id')
+  async findById(@Param('id') id: string): Promise<ListPost[]> {
+    return this.listPostService.findById(id);
+  }
+
   // tìm post theo tag.
-  @Get(':tags')
+  @Get('tags/:tags')
   async findByTags(@Param('tags') tags: string): Promise<ListPost[]> {
     return this.listPostService.findByTags(tags);
   }

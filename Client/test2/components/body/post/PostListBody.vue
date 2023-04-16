@@ -36,6 +36,17 @@
               <span> {{ onePosts.numberHeart }} likes</span>
             </div>
           </div>
+
+          <div>
+            <button
+          type="button"
+          class="button-repair-post"
+          @click="routerRepairPost(onePosts.name)"
+        >
+          Repair Post
+        </button>
+          </div>
+
           <div v-show="onePosts.checkComment" class="comment">
             <CommentBody
               @number-comment-changed="updateNumberComment(index, $event)"
@@ -66,6 +77,8 @@
         // listPosts: data.listPosts,
         listPosts: [],
         testSearch: '',
+
+        // findIdAPost: '',
       }
     },
     computed: {
@@ -79,6 +92,14 @@
         return this.$store.state.isDark;
         }
       },
+      findIdAPost: {
+        get() {
+          return this.$store.state.findIdAPost;
+        },
+        set(newValue) {
+          this.$store.commit('updateFindIdPost', newValue);
+        },
+      }
     },
     async created() {
       await this.getListPosts()
@@ -110,6 +131,12 @@
       closeComment(index) {
         this.listPosts[index].checkComment = !this.listPosts[index].checkComment
       },
+      routerRepairPost(name) {
+        const item = this.listPosts.find(item => item.name === name)
+        this.findIdAPost = item._id;
+        this.$router.push('/repairPost/RepairPost')
+      },
+
     },
   })
   </script>
@@ -149,6 +176,11 @@
   .isDark {
     background-color: #1a202c !important;
   color: white !important;
+  }
+  .button-repair-post {
+    border: 2px solid rgb(254, 185, 185);
+    border-radius: 10px;
+    background-color: rgb(254, 185, 185);
   }
   </style>
   

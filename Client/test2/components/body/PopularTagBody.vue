@@ -11,19 +11,20 @@
           </td>
         </tr>
         <tr>
-          <td><button @click="addTagClick = true">Add tag</button></td>
+          <td><button class="button-tag" @click="addTagClick = true">Add tag</button></td>
         </tr>
         <tr v-show="addTagClick"><td>
             <input
               v-model="addTagName"
               type="text"
               placeholder="Add tag"
+              style="border-radius: 10px; border: 1px solid black"
               required
             />
             <br/>
             <b v-show="checkExistOrEmpty" style="color: red">New tag is empty or not valid !!</b>
             <br/>
-            <button @click="AddTag">Add</button>
+            <button class="button-tag" @click="AddTag">Add</button>
             </td></tr>
         <tr
           v-for="(category, index) in popularTags"
@@ -35,7 +36,7 @@
             :style="{ color: checkIsDark ? 'white' : 'black' }"
           >
             #{{ category.name }}
-            <button @click="deleteTag(category.name)">Delete</button>
+            <button class="button-tag" @click="deleteTag(category.name)">Delete</button>
           </td>
         </tr>
       </tbody>
@@ -151,4 +152,9 @@ export default {
   background-color: #1a202c !important;
   color: white !important;
 }
+.button-tag {
+    border: 2px solid rgb(149, 224, 251);
+    border-radius: 10px;
+    background-color: rgb(149, 224, 251);
+  }
 </style>

@@ -4,7 +4,7 @@
       <h2 style="margin-bottom: 50px">Create new post</h2>
       <div class="info">
         <img
-          src="https://i.pinimg.com/474x/ae/ca/a6/aecaa6bd6b1e2fd3736969f676a009e2.jpg"
+          :src= "avatar"
           class="avatar"
           style="width: 40px; margin-right: 7px"
           alt="Avatar"
@@ -56,8 +56,13 @@
         </div>
       </div>
 
-      <div v-show="checkExistOrEmpty === true" :class="{warning: checkExistOrEmpty === true}">
-        <div style="color: red"><b>Please fill in all input. Input is not empty.</b></div>
+      <div
+        v-show="checkExistOrEmpty === true"
+        :class="{ warning: checkExistOrEmpty === true }"
+      >
+        <div style="color: red">
+          <b>Please fill in all input. Input is not empty.</b>
+        </div>
       </div>
 
       <div class="button-create-post">
@@ -65,9 +70,9 @@
           type="button"
           class="btn btn-primary"
           style="margin-top: 20px; border-radius: 10px"
-          @click.prevent="createNewPost"
+          @click="repairPost"
         >
-          Create Post
+          Repair Post
         </button>
       </div>
     </div>
@@ -94,37 +99,64 @@ export default {
       checkExistOrEmpty: false,
     }
   },
-  methods: {
-    async createNewPost() {
-     if (this.name === '' || this.title === '' || this.content === '' || this.tags === '') {
-      this.checkExistOrEmpty = true;
-     }  else {
-      try {
-        const response = await axios.post('http://localhost:4000/list-post', {
-          name: this.name,
-          title: this.title,
-          content: this.content,
-          tags: this.tags,
-          numberHeart: this.numberHeart,
-          heartColor: this.heartColor,
-          avatar: this.avatar,
-          checkComment: this.checkComment,
-          numberComment: this.numberComment,
-        })
-        this.name = '';
-        this.title = '';
-        this.content = '';
-        this.tags = '';
-
-        this.checkExistOrEmpty = false;
-        console.log(response.data)
-      }
-      catch(error) {
-        console.log('error')
-      }
+  computed: {
+    postId() {
+      return this.$store.state.findIdAPost
+    },
+  },
+  async mounted() {
+    try {
+      const response = await axios.get(
+        `http://localhost:4000/list-post/${this.postId}`
+      )
+      const data = response.data[0]
+      this.name = data.name
+      this.title = data.title
+      this.content = data.content
+      this.tags = data.tags
+      this.numberHeart = data.numberHeart
+      this.heartColor = data.heartColor
+      this.avatar = data.avatar
+      this.checkComment = data.checkComment
+      this.numberComment = data.numberComment
+    //   console.log(data)
+    } catch (error) {
+      console.log(error)
     }
-     }
-  }
+  },
+  methods: {
+    async repairPost() {
+      if (
+        this.name === '' ||
+        this.title === '' ||
+        this.content === '' ||
+        this.tags === ''
+      ) {
+        this.checkExistOrEmpty = true
+      } else {
+        try {
+            const response = await axios.put(
+                `http://localhost:4000/list-post/${this.postId}`,
+                {
+                name: this.name,
+                title: this.title,
+                content: this.content,
+                tags: this.tags,
+                numberHeart: this.numberHeart,
+                heartColor: this.heartColor,
+                avatar: this.avatar,
+                checkComment: this.checkComment,
+                numberComment: this.numberComment,
+                }
+            )
+            console.log(response)
+            this.$router.push('/PageWebTest')
+        } catch (error) {
+          console.log(error)
+        }
+      }
+    },
+  },
 }
 </script>
 

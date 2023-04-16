@@ -7,6 +7,7 @@ Vue.use(Vuex);
 export const state = () => ({
     inputValue: '',
     isDark: false,
+    findIdAPost: '',
   })
   
   export const mutations = {
@@ -17,6 +18,9 @@ export const state = () => ({
     updateIsDark(state, newValue) {
       state.isDark = newValue;
       // console.log(state.inputValue);
-
+    },
+    updateFindIdPost(state, newValue) {
+      state.findIdAPost = newValue;
+      console.log(state.findIdAPost);
     }
   };
