@@ -11,9 +11,15 @@
           </td>
         </tr>
         <tr>
-          <td><button class="button-tag" @click="addTagClick = true">Add tag</button></td>
+          <td>
+            <button class="button-tag" @click="addTagClick = true">
+              Add tag
+              <b-icon icon="plus-circle-fill" variant="white"></b-icon>
+            </button>
+          </td>
         </tr>
-        <tr v-show="addTagClick"><td>
+        <tr v-show="addTagClick">
+          <td>
             <input
               v-model="addTagName"
               type="text"
@@ -21,11 +27,14 @@
               style="border-radius: 10px; border: 1px solid black"
               required
             />
-            <br/>
-            <b v-show="checkExistOrEmpty" style="color: red">New tag is empty or not valid !!</b>
-            <br/>
+            <br />
+            <b v-show="checkExistOrEmpty" style="color: red"
+              >New tag is empty or not valid !!</b
+            >
+            <br />
             <button class="button-tag" @click="AddTag">Add</button>
-            </td></tr>
+          </td>
+        </tr>
         <tr
           v-for="(category, index) in popularTags"
           v-show="openPopular"
@@ -36,7 +45,9 @@
             :style="{ color: checkIsDark ? 'white' : 'black' }"
           >
             #{{ category.name }}
-            <button class="button-tag" @click="deleteTag(category.name)">Delete</button>
+            <button class="button-tag" @click="deleteTag(category.name)">
+              Delete
+            </button>
           </td>
         </tr>
       </tbody>
@@ -92,20 +103,23 @@ export default {
     },
     async AddTag() {
       if (this.addTagName === '') {
-        this.checkExistOrEmpty = true;
+        this.checkExistOrEmpty = true
       } else {
         try {
-        const response = await this.$axios.post(`http://localhost:4000/tags`, {
-          name: this.addTagName,
-        })
-        console.log(response.data)
-        this.addTagName = '';
-        this.checkExistOrEmpty = false;
-        this.getPopularTags()
-        this.addTagClick = false;
-      } catch (error) {
-        console.log(error)
-      }
+          const response = await this.$axios.post(
+            `http://localhost:4000/tags`,
+            {
+              name: this.addTagName,
+            }
+          )
+          console.log(response.data)
+          this.addTagName = ''
+          this.checkExistOrEmpty = false
+          this.getPopularTags()
+          this.addTagClick = false
+        } catch (error) {
+          console.log(error)
+        }
       }
     },
   },
@@ -153,8 +167,8 @@ export default {
   color: white !important;
 }
 .button-tag {
-    border: 2px solid rgb(149, 224, 251);
-    border-radius: 10px;
-    background-color: rgb(149, 224, 251);
-  }
+  border: 2px solid rgb(149, 224, 251);
+  border-radius: 10px;
+  background-color: rgb(149, 224, 251);
+}
 </style>
